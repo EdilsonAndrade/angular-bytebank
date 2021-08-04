@@ -8,12 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ExtratoComponent implements OnInit {
   transferencias: any[] = [];
-  _service: TransferenciaService;
-  constructor(service: TransferenciaService) {
-    this._service = service;
+  constructor(private service: TransferenciaService) {
   }
   ngOnInit(): void {
-    this.transferencias = this._service.getTransferencias;
+    this.transferencias = this.service.getTransferencias;
   }
 
 
