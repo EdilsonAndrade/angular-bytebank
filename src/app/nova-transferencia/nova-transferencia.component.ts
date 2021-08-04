@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { ITransferencia } from '../models/transferencia.model';
 
 @Component({
   selector: 'app-nova-transferencia', // selector é o nome que deverá ser usado na outra  pagina
@@ -7,13 +8,13 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class NovaTransferenciaComponent {
 
-  @Output() aoTransferir = new EventEmitter<any>();
+  @Output() aoTransferir = new EventEmitter<ITransferencia>();
 
-  valor: number = 55;
-  destino: number = 22;
+  valor: number;
+  destino: string;
 
   transferir() {
-    const transferencia = { valor: this.valor, destino: this.destino };
+    const transferencia: ITransferencia = { valor: this.valor, destino: this.destino };
     this.aoTransferir.emit(transferencia);
   }
 

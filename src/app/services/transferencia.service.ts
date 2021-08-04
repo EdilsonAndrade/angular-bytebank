@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
+import { ITransferencia } from '../models/transferencia.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransferenciaService {
 
-  private listaTransferencia: any[];
+  private listaTransferencia: ITransferencia[];
   constructor() {
     this.listaTransferencia = [];
   }
 
-  adicionarTransferencia(transferencia: any) {
+  adicionarTransferencia(transferencia: ITransferencia) {
     this.hidratar(transferencia);
     this.listaTransferencia.push(transferencia);
   }
@@ -19,7 +20,7 @@ export class TransferenciaService {
     return this.listaTransferencia;
   }
 
-  private hidratar(transferencia: any) {
-    transferencia.date = new Date();
+  private hidratar(transferencia: ITransferencia) {
+    transferencia.data = new Date();
   }
 }
