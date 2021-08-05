@@ -1,3 +1,4 @@
+import { TransferenciaService } from './../services/transferencia.service';
 import { Component, Output, EventEmitter } from '@angular/core';
 import { ITransferencia } from '../models/transferencia.model';
 
@@ -8,14 +9,21 @@ import { ITransferencia } from '../models/transferencia.model';
 })
 export class NovaTransferenciaComponent {
 
-  @Output() aoTransferir = new EventEmitter<ITransferencia>();
-
   valor: number;
   destino: string;
 
+  constructor(private service: TransferenciaService) {
+
+  }
   transferir() {
     const transferencia: ITransferencia = { valor: this.valor, destino: this.destino };
-    this.aoTransferir.emit(transferencia);
+
+    this.service.adicionar(transferencia).subscribe((transferencia: ITransferencia) => {
+      console.log(transferencia, 'transferencia adicionada')
+    },
+      (erro) => {
+        console.log('ocorreu um erro ', JSON.stringify(erro))
+      });
   }
 
 }

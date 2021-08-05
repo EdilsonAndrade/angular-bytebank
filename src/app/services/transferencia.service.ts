@@ -8,22 +8,22 @@ import { Observable } from 'rxjs';
 })
 export class TransferenciaService {
 
-  private listaTransferencia: ITransferencia[];
   private url = "http://localhost:3000/transferencias";
 
   constructor(private api: HttpClient) {
-    this.listaTransferencia = [];
   }
 
-  adicionarTransferencia(transferencia: ITransferencia) {
+  adicionar(transferencia: ITransferencia): Observable<ITransferencia> {
     this.hidratar(transferencia);
-    this.listaTransferencia.push(transferencia);
+
+    return this.api.post<ITransferencia>(this.url, transferencia);
   }
 
   getTransferencias(): Observable<ITransferencia[]> {
 
     return this.api.get<ITransferencia[]>(this.url);
   }
+
 
   private hidratar(transferencia: ITransferencia) {
     transferencia.data = new Date();
